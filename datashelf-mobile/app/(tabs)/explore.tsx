@@ -1,0 +1,66 @@
+import { StyleSheet, View } from "react-native";
+
+import ThemedDropdown from "@/components/ThemedDropdown";
+import ThemedIconButton from "@/components/ThemedIconButton";
+import ThemedStack from "@/components/ThemedStack";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemeColors } from "@/constants/Colors";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ms } from "react-native-size-matters";
+
+export default function FolderScreen() {
+  const handleGoBack = () => {};
+
+  return (
+    <View style={{ backgroundColor: ThemeColors.white }}>
+      <SafeAreaView>
+        {/* Header Components */}
+        <ThemedStack
+          direction="row"
+          justifyContent="space-between"
+          style={styles.headerbar}
+        >
+          <ThemedStack direction="row" gap={8} alignItems="center">
+            <ThemedIconButton
+              variant={"contained"}
+              onPress={handleGoBack}
+              icon="arrow-left"
+              iconSize={20}
+            />
+            <ThemedText type={"subtitle"}>Explore</ThemedText>
+          </ThemedStack>
+          <ThemedDropdown
+            placeholder="Select provider"
+            options={[
+              "AWS S3",
+              "FTP",
+              "AWS S32",
+              "FTP2",
+              "AWS S33",
+              "FTP3",
+              "AWS S34",
+              "FTP4",
+            ]}
+            value={"FTP"}
+            onChange={() => {}}
+          />
+        </ThemedStack>
+        {/* Component */}
+        <View></View>
+      </SafeAreaView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  headerbar: {
+    height: ms(50),
+    paddingHorizontal: ms(14),
+    gap: ms(8),
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: ms(1),
+    borderColor: ThemeColors.border,
+    backgroundColor: ThemeColors.white,
+  },
+});
