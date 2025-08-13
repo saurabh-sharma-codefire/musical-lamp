@@ -1,5 +1,7 @@
 import { StyleSheet, View } from "react-native";
 
+import FoldersGrid from "@/components/Data/FoldersGrid";
+import ThemedBreadCrumb from "@/components/ThemedBreadCrumb";
 import ThemedDropdown from "@/components/ThemedDropdown";
 import ThemedIconButton from "@/components/ThemedIconButton";
 import ThemedStack from "@/components/ThemedStack";
@@ -8,7 +10,7 @@ import { ThemeColors } from "@/constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ms } from "react-native-size-matters";
 
-export default function FolderScreen() {
+export default function DataScreen() {
   const handleGoBack = () => {};
 
   return (
@@ -25,9 +27,9 @@ export default function FolderScreen() {
               variant={"contained"}
               onPress={handleGoBack}
               icon="arrow-left"
-              iconSize={20}
+              iconSize={16}
             />
-            <ThemedText type={"subtitle"}>Explore</ThemedText>
+            <ThemedText type={"subtitle"}>Data</ThemedText>
           </ThemedStack>
           <ThemedDropdown
             placeholder="Select provider"
@@ -46,7 +48,14 @@ export default function FolderScreen() {
           />
         </ThemedStack>
         {/* Component */}
-        <View></View>
+        <View>
+          {/* BreadCrumb */}
+          <ThemedBreadCrumb />
+          {/* Folders and Files */}
+          <FoldersGrid />
+          {/* Pagination */}
+          {/* Folder Edit Model */}
+        </View>
       </SafeAreaView>
     </View>
   );

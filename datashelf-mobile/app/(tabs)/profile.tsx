@@ -24,7 +24,7 @@ export default function ProfileScreen() {
               variant={"contained"}
               onPress={handleGoBack}
               icon="arrow-left"
-              iconSize={20}
+              iconSize={16}
             />
             <ThemedText type={"subtitle"}>Profile</ThemedText>
           </ThemedStack>

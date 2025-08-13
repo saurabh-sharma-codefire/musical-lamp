@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     padding: ms(4),
     borderWidth: 1,
     borderColor: Colors.light.transparent,
-    borderRadius: ThemeConstants.borderRadius.md,
+    borderRadius: ThemeConstants.borderRadius.sm,
   },
   textVariant: {},
   outlinedVariant: {
