@@ -18,6 +18,7 @@ export const Colors = {
     transparent: "#FFFFFF00",
     white: "#ffffff",
     border: "#dde2e6ff",
+    lightGray: "#edf3f7ff",
   },
   dark: {
     text: "#ECEDEE",
@@ -30,6 +31,7 @@ export const Colors = {
     transparent: "#FFFFFF00",
     white: "#ffffff",
     border: "#dde2e6ff",
+    lightGray: "#dde2e6ff",
   },
 };
 

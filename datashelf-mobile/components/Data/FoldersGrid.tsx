@@ -30,9 +30,9 @@ const foldersData = [
 const FoldersGrid = () => {
   return (
     <ScrollView
-      contentContainerStyle={{
-        paddingBottom: 220, // adjust to your tab bar height
-      }}
+    // contentContainerStyle={{
+    //   padding: 10, // adjust to your tab bar height
+    // }}
     >
       <View style={styles.folderWrapper}>
         {foldersData.map((folderData) => {
@@ -48,6 +48,7 @@ export default FoldersGrid;
 const styles = StyleSheet.create({
   folderWrapper: {
     flexDirection: "row",
+    justifyContent: "space-around",
     flexWrap: "wrap",
     gap: ms(8),
     padding: ms(10),

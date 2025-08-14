@@ -1,3 +1,5 @@
+import Constants from "expo-constants";
+import { Dimensions } from "react-native";
 import { ms } from "react-native-size-matters";
 
 export const ThemeConstants = {
@@ -10,4 +12,8 @@ export const ThemeConstants = {
     xxl: ms(25),
     full: ms(50),
   },
+  headerHeight: ms(60),
+  statusBarHeight: Constants.statusBarHeight,
+  windowHeight: Dimensions.get("window").height,
+  windowWidth: Dimensions.get("window").width,
 };

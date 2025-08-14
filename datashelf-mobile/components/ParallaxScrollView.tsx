@@ -11,11 +11,14 @@ import { ThemedView } from "@/components/ThemedView";
 import { useBottomTabOverflow } from "@/components/ui/TabBarBackground";
 import { ThemeConstants } from "@/constants/ThemeConstans";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ms } from "react-native-size-matters";
 
-const HEADER_HEIGHT = 250;
+const HEADER_HEIGHT = 350;
 
 type Props = PropsWithChildren<{
   headerImage: ReactElement;
+  headerComponent: ReactElement;
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
@@ -23,6 +26,7 @@ export default function ParallaxScrollView({
   children,
   headerImage,
   headerBackgroundColor,
+  headerComponent,
 }: Props) {
   const colorScheme = useColorScheme() ?? "light";
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -66,7 +70,9 @@ export default function ParallaxScrollView({
             headerAnimatedStyle,
           ]}
         >
-          {headerImage}
+          <SafeAreaView style={{ marginTop: ThemeConstants.statusBarHeight }}>
+            {headerComponent}
+          </SafeAreaView>
         </Animated.View>
         <ThemedView
           style={[
@@ -92,6 +98,7 @@ const styles = StyleSheet.create({
   header: {
     height: HEADER_HEIGHT,
     overflow: "hidden",
+    padding: ms(3),
   },
   content: {
     flex: 1,
