@@ -29,14 +29,12 @@ const foldersData = [
 ];
 const FoldersGrid = () => {
   return (
-    <ScrollView
-    // contentContainerStyle={{
-    //   padding: 10, // adjust to your tab bar height
-    // }}
-    >
+    <ScrollView>
       <View style={styles.folderWrapper}>
         {foldersData.map((folderData) => {
-          return <FolderItem key={folderData.id} data={folderData} />;
+          return (
+            <FolderItem view={"list"} key={folderData.id} data={folderData} />
+          );
         })}
       </View>
     </ScrollView>

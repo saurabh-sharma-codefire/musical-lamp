@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { ms } from "react-native-size-matters";
 
-interface ToggleOption {
+export interface ToggleOption {
   label: string;
   value: string | number;
   icon?: React.ComponentProps<typeof Feather>["name"];

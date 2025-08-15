@@ -7,7 +7,7 @@ import { ms } from "react-native-size-matters";
 
 interface ThemedCardProps {
   header?: React.ReactNode;
-  body?: React.ReactNode;
+  children?: React.ReactNode;
   footer?: React.ReactNode;
   variant?: "elevated" | "outlined" | "filled";
   padding?: "none" | "small" | "medium" | "large";
@@ -21,7 +21,7 @@ interface ThemedCardProps {
 
 const ThemedCard = ({
   header,
-  body,
+  children,
   footer,
   variant = "elevated",
   padding = "medium",
@@ -52,7 +52,7 @@ const ThemedCard = ({
     <View style={getCardStyle()}>
       {header && <View style={[styles.cardHeader, headerStyle]}>{header}</View>}
 
-      {body && <View style={[styles.cardBody, bodyStyle]}>{body}</View>}
+      <View style={[styles.cardBody, bodyStyle]}>{children}</View>
 
       {footer && <View style={[styles.cardFooter, footerStyle]}>{footer}</View>}
     </View>

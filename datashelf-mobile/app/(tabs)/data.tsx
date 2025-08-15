@@ -1,17 +1,15 @@
 import { StyleSheet, View } from "react-native";
 
 import FoldersGrid from "@/components/Data/FoldersGrid";
+import Headerbar from "@/components/Headerbar";
 import ThemedBreadCrumb from "@/components/ThemedBreadCrumb";
 import ThemedButton from "@/components/ThemedButton";
 import ThemedDropdown from "@/components/ThemedDropdown";
-import ThemedIconButton from "@/components/ThemedIconButton";
 import ThemedStack from "@/components/ThemedStack";
 import { ThemedText } from "@/components/ThemedText";
-import ThemedToggleGroup from "@/components/ThemedToggle";
+import ThemedToggleGroup, { ToggleOption } from "@/components/ThemedToggle";
 import { ThemeColors } from "@/constants/Colors";
-import { ThemeConstants } from "@/constants/ThemeConstans";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import Constants from "expo-constants";
+import useScreenHeight from "@/hooks/useScreenHeight";
 import { useMemo, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ms } from "react-native-size-matters";
@@ -26,40 +24,21 @@ export default function DataScreen() {
   ]);
 
   // Options with only icons (labels hidden)
-  const toolOptions = [
+  const toolOptions: ToggleOption[] = [
     { label: "List", value: "list", icon: "list" },
     { label: "Grid", value: "grid", icon: "grid" },
   ];
 
-  const BottomTabHeight = useBottomTabBarHeight();
+  const ScreenHeight = useScreenHeight();
   const ScrollableAreaHeight = useMemo(
-    () =>
-      ThemeConstants.windowHeight -
-      (ThemeConstants.headerHeight +
-        PaginationBarHeight +
-        SubHeaderBarHeight +
-        Constants.statusBarHeight +
-        BottomTabHeight),
-    [BottomTabHeight]
+    () => ScreenHeight - (PaginationBarHeight + SubHeaderBarHeight),
+    [ScreenHeight]
   );
   return (
     <View style={{ backgroundColor: ThemeColors.white }}>
       <SafeAreaView>
         {/* Header Components */}
-        <ThemedStack
-          direction="row"
-          justifyContent="space-between"
-          style={styles.headerbar}
-        >
-          <ThemedStack direction="row" gap={8} alignItems="center">
-            <ThemedIconButton
-              variant={"contained"}
-              onPress={handleGoBack}
-              icon="arrow-left"
-              iconSize={16}
-            />
-            <ThemedText type={"subtitle"}>Data</ThemedText>
-          </ThemedStack>
+        <Headerbar title="Data" showGoBack={false}>
           <ThemedDropdown
             placeholder="Select provider"
             options={[
@@ -75,7 +54,7 @@ export default function DataScreen() {
             value={"FTP"}
             onChange={() => {}}
           />
-        </ThemedStack>
+        </Headerbar>
         {/* Component */}
         <View>
           {/* BreadCrumb */}
@@ -133,15 +112,4 @@ export default function DataScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  headerbar: {
-    height: ThemeConstants.headerHeight,
-    paddingHorizontal: ms(14),
-    gap: ms(8),
-    flexDirection: "row",
-    alignItems: "center",
-    borderBottomWidth: ms(1),
-    borderColor: ThemeColors.border,
-    backgroundColor: ThemeColors.white,
-  },
-});
+const styles = StyleSheet.create({});

@@ -78,7 +78,7 @@ export default function ParallaxScrollView({
           style={[
             styles.content,
             {
-              marginTop: -30,
+              // marginTop: -30,
               borderTopRightRadius: ThemeConstants.borderRadius.xxl,
               borderTopLeftRadius: ThemeConstants.borderRadius.xxl,
             },

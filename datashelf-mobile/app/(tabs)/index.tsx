@@ -1,131 +1,121 @@
-import { Platform, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import ThemedButton from "@/components/ThemedButton";
-import ThemedCard from "@/components/ThemedCard";
+import ShortInfoCard from "@/components/dashboard/ShortInfoCard/ShortInfoCard";
+import FolderItem from "@/components/Data/FolderItem";
+import Headerbar from "@/components/Headerbar";
+import ThemedIconButton from "@/components/ThemedIconButton";
+import ThemedSearchBar from "@/components/ThemedSearchBar";
+import ThemedStack from "@/components/ThemedStack";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { ThemeColors } from "@/constants/Colors";
+import { ThemeConstants } from "@/constants/ThemeConstans";
+import useScreenHeight from "@/hooks/useScreenHeight";
+import { Feather, Octicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ms } from "react-native-size-matters";
 
 export default function HomeScreen() {
+  const handleAddNew = () => {};
+  const screenHeight = useScreenHeight();
   return (
-    <ParallaxScrollView
-      // In Parallex View there will the Cards Showing the Resources and It will allow to add new Services providers
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerComponent={
-        <View style={{ padding: 10 }}>
-          <ThemedCard
-            variant="elevated"
-            header={
-              <View>
-                <ThemedText style={{ fontSize: 18, fontWeight: "bold" }}>
-                  Card Title
-                </ThemedText>
-                <ThemedText
-                  style={{ fontSize: 12, color: "#666", marginTop: 4 }}
-                >
-                  Subtitle or description
-                </ThemedText>
-              </View>
-            }
-            body={
-              <ThemedText>
-                This is the main content of the card. You can put any components
-                or content here as children.
-              </ThemedText>
-            }
-            footer={
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                }}
-              >
-                <ThemedButton
-                  title="Cancel"
-                  onPress={() => {}}
-                  variant="text"
-                  size="small"
-                />
-                <ThemedButton
-                  title="Confirm"
-                  onPress={() => {}}
-                  variant="contained"
-                  size="small"
-                />
-              </View>
-            }
-          />
-        </View>
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome! Saurabh</ThemedText>
-        <HelloWave />
-      </ThemedView>
+    <View style={{ backgroundColor: ThemeColors.white }}>
+      <SafeAreaView>
+        {/* Header Components */}
+        <Headerbar showGoBack={false} title="Dashboard">
+          <ThemedIconButton bgColor="black" variant="contained" icon="plus" />
+        </Headerbar>
+        {/* Component */}
+        <View style={[styles.container, { height: screenHeight }]}>
+          <ScrollView contentContainerStyle={styles.scrollContentContainer}>
+            {/* This Feature requires indexing of the Storage first */}
+            <ThemedSearchBar variant="outlined" placeholder="Search file" />
+            {/* Cloud Credentials Info Card Icon */}
+            <ShortInfoCard />
 
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Migrate Data Service</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Manage Users</ThemedText>
-        <ThemedText>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis
-          reiciendis magnam necessitatibus nobis nam porro? Vel saepe deleniti
-          non odit. Qui similique laborum facilis eius suscipit hic ea veniam
-          blanditiis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Natus atque vitae possimus aspernatur incidunt, quas deserunt
-          repellendus voluptate quidem molestiae ratione odio ipsum veniam
-          perferendis quis illum? Odit, tempora quod.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">
-          Another Service Card ! Not Yet Decided
-        </ThemedText>
-        <ThemedText>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis
-          reiciendis magnam necessitatibus nobis nam porro? Vel saepe deleniti
-          non odit. Qui similique laborum facilis eius suscipit hic ea veniam
-          blanditiis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Natus atque vitae possimus aspernatur incidunt, quas deserunt
-          repellendus voluptate quidem molestiae ratione odio ipsum veniam
-          perferendis quis illum? Odit, tempora quod.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+            {/* Action Buttons */}
+            <ThemedStack>
+              <ThemedText type="subtitle">Manage Files</ThemedText>
+              <ThemedStack
+                style={{ width: "100%" }}
+                justifyContent="space-between"
+                direction="row"
+              >
+                <ThemedStack
+                  style={styles.actionbutton}
+                  alignItems="center"
+                  gap={8}
+                >
+                  <Feather name="folder" size={ms(30)} />
+                  <ThemedText type="defaultSemiBold">Create Folder</ThemedText>
+                </ThemedStack>
+                <ThemedStack
+                  style={styles.actionbutton}
+                  alignItems="center"
+                  gap={8}
+                >
+                  <Feather name="folder" size={ms(30)} />
+                  <ThemedText type="defaultSemiBold">Add File</ThemedText>
+                </ThemedStack>
+                <ThemedStack
+                  style={styles.actionbutton}
+                  alignItems="center"
+                  gap={8}
+                >
+                  <Feather name="folder" size={ms(30)} />
+                  <ThemedText type="defaultSemiBold">Gallery</ThemedText>
+                </ThemedStack>
+              </ThemedStack>
+            </ThemedStack>
+
+            {/* Pinned Folders */}
+            <ThemedStack>
+              <ThemedStack direction="row" alignItems="flex-end" gap={8}>
+                <ThemedText type="subtitle">Pinned Folders</ThemedText>
+                <Octicons name="pin" size={ms(18)} />
+              </ThemedStack>
+              <ScrollView>
+                <View style={styles.folderWrapper}>
+                  {foldersData.map((folderData) => {
+                    return <FolderItem key={folderData.id} data={folderData} />;
+                  })}
+                </View>
+              </ScrollView>
+            </ThemedStack>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    </View>
   );
 }
 
+const foldersData = [
+  { id: "f1", name: "Main Folder", type: "folder" },
+  { id: "f2", name: "Projects", type: "folder" },
+  { id: "f3", name: "Documents", type: "folder" },
+  { id: "f4", name: "Images", type: "folder" },
+  { id: "f5", name: "Videos", type: "folder" },
+  { id: "f6", name: "Music", type: "folder" },
+  { id: "f7", name: "Backups", type: "folder" },
+  { id: "f8", name: "Work", type: "folder" },
+];
+
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {},
+  scrollContentContainer: {
+    padding: ms(15),
+    paddingVertical: ms(18),
+    gap: ms(20),
+  },
+  actionbutton: {
+    borderRadius: ThemeConstants.borderRadius.md,
+    width: "30%",
+    paddingVertical: ms(20),
+  },
+  folderWrapper: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    gap: ms(8),
+    padding: ms(10),
   },
 });

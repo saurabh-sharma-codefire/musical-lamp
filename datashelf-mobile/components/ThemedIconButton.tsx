@@ -1,4 +1,4 @@
-import { Colors } from "@/constants/Colors";
+import { Colors, ThemeColors } from "@/constants/Colors";
 import { ThemeConstants } from "@/constants/ThemeConstans";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
@@ -13,9 +13,10 @@ import { ms } from "react-native-size-matters";
 
 interface ThemedIconButtonProps {
   icon: React.ComponentProps<typeof Feather>["name"];
-  iconSize: number;
-  onPress: (event: GestureResponderEvent) => void;
-  variant: "text" | "outlined" | "contained";
+  iconSize?: number;
+  bgColor?: string;
+  onPress?: (event: GestureResponderEvent) => void;
+  variant?: "text" | "outlined" | "contained";
   buttonStyles?: TouchableOpacityProps["style"];
   buttonIconStyles?: TextStyle;
 }
@@ -24,6 +25,7 @@ const ThemedIconButton = ({
   icon,
   iconSize = 20,
   variant = "text",
+  bgColor = ThemeColors.primary,
   onPress,
   buttonStyles,
   buttonIconStyles,
