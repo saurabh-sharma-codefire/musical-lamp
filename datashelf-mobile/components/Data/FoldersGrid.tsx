@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { ms } from "react-native-size-matters";
 import FolderItem from "./FolderItem";
 
-const foldersData = [
+export const foldersDummyData = [
   { id: "f1", name: "Main Folder", type: "folder" },
   { id: "f2", name: "Projects", type: "folder" },
   { id: "f3", name: "Documents", type: "folder" },
@@ -27,13 +27,26 @@ const foldersData = [
   },
   { id: "file7", name: "Demo_Video.mp4", type: "file", fileType: "video" },
 ];
-const FoldersGrid = () => {
+const FoldersGrid = ({
+  data = [],
+  view,
+  handleMenu = () => {},
+  onResourceClick = () => {},
+}: {
+  view: "list" | "grid";
+}) => {
   return (
     <ScrollView>
       <View style={styles.folderWrapper}>
-        {foldersData.map((folderData) => {
+        {data.map((folderData) => {
           return (
-            <FolderItem view={"list"} key={folderData.id} data={folderData} />
+            <FolderItem
+              handleMenu={handleMenu}
+              onResourceClick={onResourceClick}
+              view={view}
+              key={folderData.id}
+              data={folderData}
+            />
           );
         })}
       </View>
@@ -46,9 +59,8 @@ export default FoldersGrid;
 const styles = StyleSheet.create({
   folderWrapper: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     flexWrap: "wrap",
-    gap: ms(8),
     padding: ms(10),
   },
 });

@@ -22,6 +22,7 @@ export const IconConstants = {
       source={folderIcon}
       placeholder={{ blurhash }}
       contentFit={defaultProps.contentFit}
+      {...props}
     />
   ),
   file: ({ style = {}, ...props }: any) => (
@@ -34,6 +35,7 @@ export const IconConstants = {
       source={fileIcon}
       placeholder={{ blurhash }}
       contentFit={defaultProps.contentFit}
+      {...props}
     />
   ),
 };

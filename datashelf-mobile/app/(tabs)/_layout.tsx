@@ -41,7 +41,7 @@ export default function TabLayout() {
         options={{
           title: "Data",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="database" color={color} />
+            <IconSymbol size={28} name="hard-drive" color={color} />
           ),
         }}
       />

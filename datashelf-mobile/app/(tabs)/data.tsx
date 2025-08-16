@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 
-import FoldersGrid from "@/components/Data/FoldersGrid";
+import FolderResourceMenu from "@/components/Data/FolderResourceMenu";
+import FoldersGrid, { foldersDummyData } from "@/components/Data/FoldersGrid";
 import Headerbar from "@/components/Headerbar";
 import ThemedBreadCrumb from "@/components/ThemedBreadCrumb";
 import ThemedButton from "@/components/ThemedButton";
@@ -19,6 +20,7 @@ const PaginationBarHeight = ms(60),
 
 export default function DataScreen() {
   const handleGoBack = () => {};
+  const [viewMode, setViewMode] = useState("grid");
   const [singleSelection, setSingleSelection] = useState<(string | number)[]>([
     "list",
   ]);
@@ -34,23 +36,39 @@ export default function DataScreen() {
     () => ScreenHeight - (PaginationBarHeight + SubHeaderBarHeight),
     [ScreenHeight]
   );
+
+  const [resourceData, setResourceData] = useState(foldersDummyData);
+  const [showResourceMenu, setShowResourceMenu] = useState({
+    status: true,
+    resourceId: null,
+  });
+
+  const closeResourceMenu = () => {
+    setShowResourceMenu({
+      status: false,
+      resourceId: null,
+    });
+  };
+  const handleResourceMenu = (resourceData) => {
+    // Open Resource Info Folder with actions
+    console.log("Pressed Menu");
+    setShowResourceMenu({ status: true, resourceId: resourceData?.id });
+  };
+
+  const handleResourcePress = () => {
+    console.log("Pressed Handle  resouce");
+
+    // Redirect to resource Folder or show a preview of it
+  };
   return (
     <View style={{ backgroundColor: ThemeColors.white }}>
       <SafeAreaView>
         {/* Header Components */}
         <Headerbar title="Data" showGoBack={false}>
           <ThemedDropdown
-            placeholder="Select provider"
-            options={[
-              "AWS S3",
-              "FTP",
-              "AWS S32",
-              "FTP2",
-              "AWS S33",
-              "FTP3",
-              "AWS S34",
-              "FTP4",
-            ]}
+            placeholder="Select"
+            variant="text"
+            options={["AWS S3", "FTP", "G Drive", "Dropbox"]}
             value={"FTP"}
             onChange={() => {}}
           />
@@ -71,8 +89,10 @@ export default function DataScreen() {
             </ThemedStack>
             <ThemedToggleGroup
               options={toolOptions}
-              selectedValues={singleSelection}
-              onSelectionChange={setSingleSelection}
+              selectedValues={[viewMode]}
+              onSelectionChange={(UpdatedView) => {
+                setViewMode(UpdatedView[0]);
+              }}
               variant="outlined"
               size="medium"
               multiSelect={false}
@@ -81,7 +101,12 @@ export default function DataScreen() {
           </ThemedStack>
           {/* Folders and Files */}
           <View style={{ height: ScrollableAreaHeight }}>
-            <FoldersGrid />
+            <FoldersGrid
+              data={resourceData}
+              view={viewMode}
+              handleMenu={handleResourceMenu}
+              onResourceClick={handleResourcePress}
+            />
           </View>
           {/* Pagination */}
           <ThemedStack
@@ -92,21 +117,29 @@ export default function DataScreen() {
             alignItems="center"
           >
             <ThemedButton
+              leftIcon={"arrow-left"}
               size="small"
               title="Back"
               onPress={() => console.log("Primary pressed")}
-              variant="outlined"
+              variant="text"
             />
             <ThemedText>25/478</ThemedText>
             <ThemedButton
+              rightIcon={"arrow-right"}
               size="small"
               title="Next"
               onPress={() => console.log("Primary pressed")}
-              variant="outlined"
+              variant="text"
             />
           </ThemedStack>
           {/* Folder Edit Model */}
         </View>
+        <FolderResourceMenu
+          show={showResourceMenu.status}
+          resourceId={showResourceMenu.resourceId}
+          resourceList={resourceData}
+          handleClose={closeResourceMenu}
+        />
       </SafeAreaView>
     </View>
   );

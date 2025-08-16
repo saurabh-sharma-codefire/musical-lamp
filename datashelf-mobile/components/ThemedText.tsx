@@ -1,6 +1,7 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
+import { StyleSheet, Text, type TextProps } from "react-native";
 
-import { useThemeColor } from '@/hooks/useThemeColor';
+import { ThemeColors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -48,14 +49,17 @@ const styles = StyleSheet.create({
   body3: {
     fontSize: 8,
     lineHeight: 12,
+    color: ThemeColors.bodyText,
   },
   body2: {
     fontSize: 10,
     lineHeight: 14,
+    color: ThemeColors.bodyText,
   },
   body: {
     fontSize: 12,
     lineHeight: 16,
+    color: ThemeColors.bodyText,
   },
   default: {
     fontSize: 16,

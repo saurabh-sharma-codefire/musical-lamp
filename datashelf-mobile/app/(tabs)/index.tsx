@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import ShortInfoCard from "@/components/dashboard/ShortInfoCard/ShortInfoCard";
-import FolderItem from "@/components/Data/FolderItem";
+import FoldersGrid from "@/components/Data/FoldersGrid";
 import Headerbar from "@/components/Headerbar";
 import ThemedIconButton from "@/components/ThemedIconButton";
 import ThemedSearchBar from "@/components/ThemedSearchBar";
@@ -45,24 +45,49 @@ export default function HomeScreen() {
                   alignItems="center"
                   gap={8}
                 >
-                  <Feather name="folder" size={ms(30)} />
-                  <ThemedText type="defaultSemiBold">Create Folder</ThemedText>
+                  <View style={styles.actionbuttonIcon}>
+                    <Feather name="folder" size={ms(30)} />
+                  </View>
+                  <ThemedText style={styles.actionButtonLabel}>
+                    Create Folder
+                  </ThemedText>
                 </ThemedStack>
                 <ThemedStack
                   style={styles.actionbutton}
                   alignItems="center"
                   gap={8}
                 >
-                  <Feather name="folder" size={ms(30)} />
-                  <ThemedText type="defaultSemiBold">Add File</ThemedText>
+                  <View style={styles.actionbuttonIcon}>
+                    <Feather name="upload-cloud" size={ms(30)} />
+                  </View>
+                  <ThemedText style={styles.actionButtonLabel}>
+                    Upload File
+                  </ThemedText>
+                </ThemedStack>
+
+                <ThemedStack
+                  style={styles.actionbutton}
+                  alignItems="center"
+                  gap={8}
+                >
+                  <View style={styles.actionbuttonIcon}>
+                    <Feather name="pie-chart" size={ms(30)} />
+                  </View>
+                  <ThemedText style={styles.actionButtonLabel}>
+                    Analytics
+                  </ThemedText>
                 </ThemedStack>
                 <ThemedStack
                   style={styles.actionbutton}
                   alignItems="center"
                   gap={8}
                 >
-                  <Feather name="folder" size={ms(30)} />
-                  <ThemedText type="defaultSemiBold">Gallery</ThemedText>
+                  <View style={styles.actionbuttonIcon}>
+                    <Feather name="image" size={ms(30)} />
+                  </View>
+                  <ThemedText style={styles.actionButtonLabel}>
+                    Gallery
+                  </ThemedText>
                 </ThemedStack>
               </ThemedStack>
             </ThemedStack>
@@ -73,13 +98,7 @@ export default function HomeScreen() {
                 <ThemedText type="subtitle">Pinned Folders</ThemedText>
                 <Octicons name="pin" size={ms(18)} />
               </ThemedStack>
-              <ScrollView>
-                <View style={styles.folderWrapper}>
-                  {foldersData.map((folderData) => {
-                    return <FolderItem key={folderData.id} data={folderData} />;
-                  })}
-                </View>
-              </ScrollView>
+              <FoldersGrid view="list" data={foldersData} />
             </ThemedStack>
           </ScrollView>
         </View>
@@ -108,8 +127,18 @@ const styles = StyleSheet.create({
   },
   actionbutton: {
     borderRadius: ThemeConstants.borderRadius.md,
-    width: "30%",
+    width: "24%",
     paddingVertical: ms(20),
+  },
+  actionButtonLabel: {
+    color: ThemeColors.bodyText,
+    fontSize: ms(13),
+    textAlign: "center",
+  },
+  actionbuttonIcon: {
+    backgroundColor: ThemeColors.lightGray,
+    padding: ms(10),
+    borderRadius: ThemeConstants.borderRadius.lg,
   },
   folderWrapper: {
     flexDirection: "row",

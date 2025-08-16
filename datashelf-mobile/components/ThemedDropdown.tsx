@@ -116,7 +116,7 @@ export default ThemedDropdown;
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: "row",
-    minWidth: ms(150),
+    minWidth: ms(80),
     alignItems: "center",
     justifyContent: "space-between",
     padding: ms(8),

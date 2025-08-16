@@ -1,23 +1,34 @@
 import { IconConstants } from "@/constants/IconConstants";
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ms } from "react-native-size-matters";
 import ThemedIconButton from "../ThemedIconButton";
 import ThemedStack from "../ThemedStack";
 import { ThemedText } from "../ThemedText";
 
-const GridFolderItem = ({ icon, data }) => {
+const GridFolderItem = ({ icon, data, handleMenu, onResourceClick }) => {
   return (
-    <TouchableOpacity style={[styles.container, styles.gridStyle]}>
+    <TouchableOpacity
+      onPress={onResourceClick}
+      onLongPress={handleMenu}
+      style={[styles.container, styles.gridStyle]}
+    >
       {icon}
-      <Text>{data.name}</Text>
+      <Text numberOfLines={1}>{data.name}</Text>
     </TouchableOpacity>
   );
 };
-const ListFolderItem = ({ icon, data }) => {
+const ListFolderItem = ({ icon, data, handleMenu, onResourceClick }) => {
   return (
-    <ThemedStack direction="row" style={styles.listContainer}>
-      <TouchableOpacity style={[styles.container, styles.listStyle]}>
+    <ThemedStack
+      direction="row"
+      alignItems="center"
+      style={styles.listContainer}
+    >
+      <TouchableOpacity
+        onPress={onResourceClick}
+        style={[styles.container, styles.listStyle]}
+      >
         <ThemedStack
           direction="row"
           alignItems="center"
@@ -31,25 +42,34 @@ const ListFolderItem = ({ icon, data }) => {
         </ThemedStack>
       </TouchableOpacity>
       <ThemedStack>
-        <ThemedIconButton icon="code" />
+        <ThemedIconButton onPress={handleMenu} icon="more-vertical" />
       </ThemedStack>
     </ThemedStack>
   );
 };
 
-const FolderItem = ({ data, view = "grid" }) => {
+const FolderItem = ({
+  data,
+  view = "grid",
+  handleMenu = () => {},
+  onResourceClick = () => {},
+}) => {
   const FolderIcon =
     data.type === "folder" ? IconConstants.folder : IconConstants.file;
-  const isListView = view === "list";
+  const isListView = useMemo(() => view === "list", [view]);
   return isListView ? (
     <ListFolderItem
       data={data}
-      icon={<FolderIcon style={{ height: ms(40), width: ms(40) }} />}
+      handleMenu={() => handleMenu(data)}
+      onResourceClick={() => onResourceClick(data)}
+      icon={<FolderIcon style={{ height: ms(45), width: ms(45) }} />}
     />
   ) : (
     <GridFolderItem
       data={data}
-      icon={<FolderIcon style={{ height: ms(120), width: ms(120) }} />}
+      handleMenu={() => handleMenu(data)}
+      onResourceClick={() => onResourceClick(data)}
+      icon={<FolderIcon style={{ height: ms(80), width: ms(80) }} />}
     />
   );
 };
@@ -65,13 +85,12 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     justifyContent: "flex-start",
-    backgroundColor: "red",
   },
   listContainer: {
     width: "100%",
   },
   gridStyle: {
-    width: "45%",
+    width: "32%",
   },
 });
 
