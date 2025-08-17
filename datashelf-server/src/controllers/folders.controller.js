@@ -17,6 +17,7 @@ exports.listResources = async (req, res) => {
         console.log("Credential", type, metadata)
         const folderService = new FolderService(type, metadata); // e.g., type = 's3' or 'ftp'
         const resources = await folderService.listResources(path);
+        resources.Contents = folderService.transformS3ListToCommonArray(resources)
         return res.REST.SUCCESS(1, "Resources listed", resources);
     } catch (error) {
         CommonService.filterError(error, req, res);
