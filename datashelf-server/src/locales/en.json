@@ -26,5 +26,15 @@
 	"email is required": "email is required",
 	"Password must be more than 8 characters": "Password must be more than 8 characters",
 	"Failed to Create Account": "Failed to Create Account",
-	"User Not Found!": "User Not Found!"
+	"User Not Found!": "User Not Found!",
+	"VALIDATION_ERROR": "VALIDATION_ERROR",
+	"Credential created Successfully": "Credential created Successfully",
+	"Fetched credentials successfully": "Fetched credentials successfully",
+	"Fetched all credentials (including deleted)": "Fetched all credentials (including deleted)",
+	"Fetched credential successfully": "Fetched credential successfully",
+	"Fetched credential (including deleted)": "Fetched credential (including deleted)",
+	"Credential updated successfully": "Credential updated successfully",
+	"Credential deleted (soft) successfully": "Credential deleted (soft) successfully",
+	"Credential deleted permanently": "Credential deleted permanently",
+	"Resources listed": "Resources listed"
 }
